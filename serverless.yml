@@ -1,0 +1,39 @@
+org: tuxidomasx
+app: ping-pong-tally
+service: ping-pong-tally
+frameworkVersion: '3'
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+  
+
+functions:
+  read:
+    handler: handler.read
+    events:
+      - httpApi:
+          path: /
+          method: get
+  addGame:
+    handler: handler.add_game
+    events:
+      - httpApi:
+          path: /game
+          method: POST
+  editGame:
+    handler: handler.edit_game
+    events:
+      - httpApi:
+          path: /game
+          method: PUT
+          
+  delGame:
+    handler: handler.del_game
+    events:
+      - httpApi:
+          path: /game
+          method: DELETE
+
+plugins:
+- serverless-offline
